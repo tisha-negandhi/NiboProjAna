@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static',filename='assets/images/favicon.png')}}">
+   
+    <title></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{url_for('static',filename='assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+     <!-- page CSS -->
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
+     <link href="{{url_for('static',filename='assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+     <link href="{{url_for('static',filename='assets/plugins/switchery/dist/switchery.min.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+     <link href="{{url_for('static',filename='assets/plugins/footable/css/footable.core.css')}}" rel="stylesheet">
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="{{url_for('static',filename='css/colors/blue.css')}}" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="fix-header card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {% include "header.html" %}
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        {% include "sidebar.html" %}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-block">
+
+        
+                            
+                                <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#add-team">Create Team</button>
+                                <div id="add-team" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title" id="myModalLabel">Create Team</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <from class="form-horizontal form-material">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Team name"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Team Id."> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Project Name"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Team Leader"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Age">
+                                                        </div>
+                                                        <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Upload Blackbook PDF</span>
+                                                            <input type="file" class="upload"> 
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </from>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Save</button>
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+                                <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#join-team">Join Team</button>
+                            
+                                <div id="join-team" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title" id="myModalLabel">Join Team</h4> </div>
+                                            <div class="modal-body">
+                                                <from class="form-horizontal form-material">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Team name"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Team Id."> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Student Name"> </div>
+                                                       
+                                                    </div>
+                                                </from>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Join Team</button>
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+
+
+                                <h6 class="card-subtitle"></h6>
+                                <div class="table-responsive">
+                                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="5">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Team Name</th>
+                                                <th>Team Id.</th>
+                                                <th>Project Name</th>
+                                                <th>Leader</th>
+                                                
+                                                <th>Submission date</th>
+                                                
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">Cinthol</a>
+                                                </td>
+                                                <td>23442</td>
+                                                <td>Soap1</td>
+                                                <td><span class="label label-info">Ramlal</span> </td>
+                                                
+                                                <td>12-10-2014</td>
+                                        
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">Dove</a>
+                                                </td>
+                                                <td>234542</td>
+                                                <td>Soap2</td>
+                                                <td><span class="label label-info">Raju</span> </td>
+                                                
+                                                <td>21-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">Dettol</a>
+                                                </td>
+                                                <td>9875</td>
+                                                <td>Soap3</td>
+                                                <td><span class="label label-info">Ramesh</span> </td>
+                                                
+                                                <td>13-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">Santoor</a>
+                                                </td>
+                                                <td>2345452</td>
+                                                <td>Soap4</td>
+                                                <td><span class="label label-info">jyoti</span> </td>
+                                                
+                                                <td>23-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">lyzol</a>
+                                                </td>
+                                                <td>2344354852</td>
+                                                <td>Soap5</td>
+                                                <td><span class="label label-info">gagan</span> </td>
+                                                
+                                                <td>12-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">bbb</a>
+                                                </td>
+                                                <td>234564442</td>
+                                                <td>Soap6</td>
+                                                <td><span class="label label-info">cathy</span> </td>
+                                                
+                                                <td>25-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">drfgd</a>
+                                                </td>
+                                                <td>2345742</td>
+                                                <td>Soap7</td>
+                                                <td><span class="label label-info">govinda</span> </td>
+                                                
+                                                <td>12-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">dfvss</a>
+                                                </td>
+                                                <td>23425442</td>
+                                                <td>Soap8</td>
+                                                <td><span class="label label-info">abhi</span> </td>
+                                                
+                                                <td>5-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">dsgs</a>
+                                                </td>
+                                                <td>2344565442</td>
+                                                <td>Soap9</td>
+                                                <td><span class="label label-info">vidyut</span> </td>
+                                                
+                                                <td>12-10-2014</td>
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>
+                                                    <a href="profilemainpage.html">sedvs</a>
+                                                </td>
+                                                <td>23534442</td>
+                                                <td>Soap10</td>
+                                                <td><span class="label label-info">deven</span> </td>
+                                                
+                                                <td>16-10-2014</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                
+                                                <td colspan="7">
+                                                    <div class="text-right">
+                                                        <ul class="pagination"> </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        
+                        <!-- Column -->
+                        
+                        <!-- Column -->
+                       
+                        <!-- Column -->
+                       
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            {% include 'footer.html' %}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{{url_for('static',filename='assets/plugins/jquery/jquery.min.js')}}"></script>
+    <!-- Bootstrap tether Core JavaScript-->
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/tether.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{{url_for('static',filename='js/jquery.slimscroll.js')}}"></script>
+    <!--Wave Effects -->
+    <script src="{{url_for('static',filename='js/waves.js')}}"></script>
+    <!--Menu sidebar -->
+    <script src="{{url_for('static',filename='js/sidebarmenu.js')}}"></script>
+    <!--stickey kit -->
+    <script src="{{url_for('static',filename='assets/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{url_for('static',filename='js/custom.min.js')}}"></script>
+    <!-- Footable -->
+    <script src="{{url_for('static',filename='assets/plugins/footable/js/footable.all.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
+    <!--FooTable init-->
+    <script src="{{url_for('static',filename='js/footable-init.js')}}"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="{{url_for('static',filename='assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+    
+
+
+
+    <!-- ============================================================== -->
+    <!-- Tags page plugins -->
+    <!-- ============================================================== -->
+    <script src="{{url_for('static',filename='assets/plugins/switchery/dist/switchery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js')}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='assets/plugins/multiselect/js/jquery.multi-select.js')}}"></script> -->
+    
+    <script>
+    jQuery(document).ready(function() {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function() {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true,
+            verticalupclass: 'ti-plus',
+            verticaldownclass: 'ti-minus'
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000
+        });
+        $("input[name='tch3_22']").TouchSpin({
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function() {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function() {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function() {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function() {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+   
+    </script>
+
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+  </body>
+
+</html>
