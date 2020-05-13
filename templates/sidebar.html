@@ -5,21 +5,27 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
-                <div class="user-profile" style="background:url('{{url_for('static',filename='assets/images/background/user-info.jpg')}}');" no-repeat;>
+                <!-- <div class="user-profile" style="background:url('{{url_for('static',filename='assets/images/background/user-info.jpg')}}');" no-repeat;> -->
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="{{url_for('static',filename='assets/images/users/profile.png')}}"  alt="user" /> </div>
                     <!-- User profile text-->
-                </div>
+                <!-- </div> -->
                  <!-- End User profile text-->
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span></a>
-
+                            <ul aria-expanded="false" class="collapse">
+                               
+                                
+                            </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-laptop-windows"></i><span class="hide-menu">profile</span></a>
-                           
+                            <ul aria-expanded="false" class="collapse">
+                               
+                                
+                            </ul>
                         </li>
                         <li>
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Teams</span></a>
@@ -31,10 +37,14 @@
                         </li>
                         <li>
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Project</span></a>
-                     
+                            <ul aria-expanded="false" class="collapse">
+                               
+                                
+                            </ul>
                         </li>                     
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
+        </aside>
