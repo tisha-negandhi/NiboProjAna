@@ -5,9 +5,9 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- User profile -->
-                <div class="user-profile" style="background: url"({{url_for('static',filename='assets/images/background/user-info.jpg')}}" no-repeat;">
+                <div class="user-profile" style="background:url('{{url_for('static',filename='assets/images/background/user-info.jpg')}}');" no-repeat;>
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="../assets/images/users/profile.png"  alt="user" /> </div>
+                    <div class="profile-img"> <img src="{{url_for('static',filename='assets/images/users/profile.png')}}"  alt="user" /> </div>
                     <!-- User profile text-->
                 </div>
                  <!-- End User profile text-->

@@ -95,7 +95,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="{{url_for('static',filename='assets/plugins/jquery/jquery.min.js')}}"></script>
-    <!-- Bootstrap tether Core JavaScript
+    <!-- Bootstrap tether Core JavaScript-->
     <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/tether.min.js')}}"></script>
     <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
@@ -159,7 +159,8 @@
             min: -1000000000,
             max: 1000000000,
             stepinterval: 50,
-            maxboostedstep: 10000000,
+            maxboostedstep: 10000000
+        });
         $("input[name='tch3_22']").TouchSpin({
             prefix: '$'
         });
@@ -229,12 +230,12 @@
             templateResult: formatRepo, // omitted for brevity, see the source of this page
             templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
         });
-    });
+   
     </script>
 
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-</body>
+  </body>
 
 </html>
