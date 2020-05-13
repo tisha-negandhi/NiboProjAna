@@ -3,6 +3,10 @@ from flask import render_template
 app = Flask(__name__)
 
 @app.route("/")
+def signin():
+    return render_template('signin.html')
+
+@app.route("/blank")
 def blank():
     return render_template('blank.html')
 
@@ -10,15 +14,17 @@ def blank():
 def teams():
     return render_template('team.html')
 
-<<<<<<< HEAD
 @app.route("/project")
-def project():
+def proeject():
     return render_template('project.html')
-=======
+
+@app.route("/projectform")
+def proejectform():
+    return render_template('projectform.html')
+
 @app.route("/profile")
 def sam():
     return render_template('profile.html')
->>>>>>> 0988a3335f9ad157ace27fd33a59870ea2564fd0
 
 if __name__=='__main__':
     app.run(debug=True)
