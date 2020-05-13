@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static',filename='assets/images/favicon.png')}}">
+   
+    <title></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{url_for('static',filename='assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+     <!-- page CSS -->
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
+     <link href="{{url_for('static',filename='assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+     <link href="{{url_for('static',filename='assets/plugins/switchery/dist/switchery.min.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
+     <link href="{{url_for('static',filename='assets/plugins/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="{{url_for('static',filename='css/colors/blue.css')}}" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="fix-header card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {% include "header.html" %}
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        {% include "sidebar.html" %}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-block">
+                                <center class="m-t-30"> <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
+                                    <h4 class="card-title m-t-10">Hanna Gover</h4>
+                                    <h6 class="card-subtitle">Diploma Student</h6>
+                                    <div class="row text-center justify-content-md-center">
+                                        
+                                    </div>
+                                </center>
+                            </div>
+                            <div>
+                                <hr> </div>
+                            <div class="card-block"> <small class="text-muted">Email address </small>
+                                <h6>hannagover@gmail.com</h6> <small class="text-muted p-t-30 db">Phone</small>
+                                <h6>+91 654 784 547</h6> 
+                                <small class="text-muted p-t-30 db">Year</small>
+                                <h6>Second Year</h6> 
+                                <small class="text-muted p-t-30 db">Department</small>
+                                <h6>Computer Engineering(CO)</h6> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Display</a> </li>
+                                
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="card-block">
+                                        <div class="profiletimeline">
+                                        <small class="text-muted p-t-30 db">Full Name</small>
+                                        <h6>Hanna Gover</h6>
+                                        <small class="text-muted p-t-30 db">Email</small>
+                                        <h6>hannagover@gmail.com</h6>  
+                                        <small class="text-muted p-t-30 db">Phone No.</small>
+                                        <h6>+91 654 784 547</h6>
+                                            <small class="text-muted p-t-30 db">Year</small>
+                                            <h6>Second Year</h6>
+                                            <small class="text-muted p-t-30 db">Department</small>
+                                            <h6>Computer Engineering</h6>
+                                            <small class="text-muted p-t-30 db">Scheme</small>
+                                            <h6>I</h6>
+                                            <small class="text-muted p-t-30 db">Division</small>
+                                            <h6>A</h6>
+                                            <small class="text-muted p-t-30 db">Roll No.</small>
+                                            <h6>27</h6>
+                                            <small class="text-muted p-t-30 db">Enrollment No.</small>
+                                            <h6>183567800</h6>
+                                        
+                                           
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--second tab-->
+                                
+                                <div class="tab-pane" id="settings" role="tabpanel">
+                                    <div class="card-block">
+                                        <form class="form-horizontal form-material">
+                                            <div class="form-group">
+                                                <label class="col-md-12">Full Name</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="example-email" class="col-md-12">Email</label>
+                                                <div class="col-md-12">
+                                                    <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Password</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Phone No</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="9873475223" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label class="col-sm-12">Select Year</label> 
+                                             <div class="col-md-12">
+                                                <select class="form-control form-control-line">
+                                                    <option>FY</option>
+                                                    <option>SY</option>
+                                                    <option>TY</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Select Department</label> 
+                                                 <div class="col-md-12">
+                                                    <select class="form-control form-control-line">
+                                                        <option>Computer Engineering</option>
+                                                        <option>Information Technology</option>
+                                                        <option>Electrical Engineering</option>
+                                                        <option>Mechanical Engineering</option>
+                                                        <option>Civil Engineering</option>
+                                                        
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Select Scheme</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control form-control-line">
+                                                        <option>I</option>
+                                                        <option>G</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Division</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="A" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Roll No</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="27" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Enrollment No.</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="183567800" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button class="btn btn-success">Update Profile</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            {% include 'footer.html' %}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{{url_for('static',filename='assets/plugins/jquery/jquery.min.js')}}"></script>
+    <!-- Bootstrap tether Core JavaScript-->
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/tether.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{{url_for('static',filename='js/jquery.slimscroll.js')}}"></script>
+    <!--Wave Effects -->
+    <script src="{{url_for('static',filename='js/waves.js')}}"></script>
+    <!--Menu sidebar -->
+    <script src="{{url_for('static',filename='js/sidebarmenu.js')}}"></script>
+    <!--stickey kit -->
+    <script src="{{url_for('static',filename='assets/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{url_for('static',filename='js/custom.min.js')}}"></script>
+
+    
+
+
+
+    <!-- ============================================================== -->
+    <!-- Tags page plugins -->
+    <!-- ============================================================== -->
+    <script src="{{url_for('static',filename='assets/plugins/switchery/dist/switchery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js')}}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='assets/plugins/multiselect/js/jquery.multi-select.js')}}"></script> -->
+    
+    <script>
+    jQuery(document).ready(function() {
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function() {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true,
+            verticalupclass: 'ti-plus',
+            verticaldownclass: 'ti-minus'
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000
+        });
+        $("input[name='tch3_22']").TouchSpin({
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function() {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function() {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function() {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function() {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+   
+    </script>
+
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+  </body>
+
+</html>
