@@ -3,12 +3,16 @@ from flask import render_template
 app = Flask(__name__)
 
 @app.route("/")
-def deshna():
+def blank():
     return render_template('blank.html')
 
 @app.route("/teampage")
 def teams():
     return render_template('team.html')
+
+@app.route("/project")
+def project():
+    return render_template('project.html')
 
 if __name__=='__main__':
     app.run(debug=True)
