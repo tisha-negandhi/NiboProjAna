@@ -10,5 +10,9 @@ def deshna():
 def teams():
     return render_template('team.html')
 
+@app.route("/profile")
+def sam():
+    return render_template('profile.html')
+
 if __name__=='__main__':
     app.run(debug=True)
