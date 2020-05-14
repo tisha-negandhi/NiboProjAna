@@ -29,6 +29,7 @@ def teams():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
+        print(passed_object)
        
     return render_template('team.html')
 
