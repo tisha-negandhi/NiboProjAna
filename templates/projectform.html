@@ -13,6 +13,7 @@
    
     <title></title>
     <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/plugins/dropify/dist/css/dropify.min.css')}}">
     <link href="{{url_for('static',filename='assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
      <!-- page CSS -->
      <link href="{{url_for('static',filename='assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
@@ -95,52 +96,43 @@
                         <div class="card">
                             <div class="card-block">
                                  <h4 class="card-title">Project Add/Edit Form</h4>
-                                                    <form class="form-material m-t-40">
+                                                    <form class="form-material m-t-40" method="POST" action="/project">
                                                         <div class="form-group">
                                                             <label> <span class="help"> Project Title</span></label>
-                                                            <input type="text" class="form-control form-control-line" > </div>
+                                                            <input type="text" class="form-control form-control-line" name="title" > </div>
                                                         <div class="form-group">
                                                             <span class="help">One line description</span>
-                                                            <input type="text" class="form-control form-control-line" >                                         </div>
+                                                            <input type="text" class="form-control form-control-line" name="description" >                                         </div>
                                                         
                                                        
-                                                            <div class="form-group" class="form-control">
+                                                            <div class="form-group">
                                                             <label>Tags of technologes used </label>
                                                             <br>
-                                                            <input type="text"  data-role="tagsinput" placeholder="add tags" class="form-control form-control-line"> 
+                                                            <input type="text"  data-role="tagsinput" placeholder="add tags" class="form-control form-control-line" name="tags"> 
 
-                                                        </div>        
+                                                        </div>    
                                                           
                                                         <div class="form-group" class="form-control">
                                                             <label>Youtube video link</label>
-                                                            <input type="url"class="form-control form-control-line">
+                                                            <input type="url"class="form-control form-control-line" name="youtube">
                                                         </div>
                                                         <div class="form-group" class="form-control">
                                                             <label>Git hub link</label>
-                                                            <input type="url"class="form-control form-control-line">
+                                                            <input type="url"class="form-control form-control-line" name="github">
                                                         </div>
+                                                        
                                                         <div class="form-group">
-                                                            <label>Upload image</label>
-                                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                                                <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select image</span> <span class="fileinput-exists">Change</span>
-                                                                <input type="hidden">
-                                                                <input type="file" name="..."> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Upload PDF</label>
+                                                            <label>File upload</label>
                                                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                                                 <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
                                                                 <input type="hidden">
-                                                                <input type="file" name="..."> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
-                                                                
-                                                        
+                                                                <input type="file" name="projectfiles"> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" name="file">Remove</a> </div>
                                                         </div>
-                                                        
-                                                            
-                                        
+                                                        <button class="btn btn-success" type="submit">Submit</button>
+                                                        <button class="btn btn-success" type="submit">Cancel</button>
                                                     </form>
-                                                    <button class="btn btn-primary icons" type="button">Submit</button>
-                                                    <button class="btn btn-primary icons" type="button">Cancel</button>
+                                                  
+                                                   
                                         
                         </div>
                     </div>
@@ -172,6 +164,8 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+    <script src="{{url_for('static',filename='assets/plugins/dropify/dist/js/dropify.min.js')}}"></script>
+    
     <script src="{{url_for('static',filename='assets/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript-->
     <script src="{{url_for('static',filename='assets/plugins/bootstrap/js/tether.min.js')}}"></script>
@@ -192,7 +186,9 @@
 <script src="{{url_for('static',filename='assets/plugins/peity/jquery.peity.min.js')}}"></script>
 <script src="{{url_for('static',filename='assets/plugins/peity/jquery.peity.init.js')}}"></script>
 
-
+ <!-- ============================================================== -->
+ <script src="{{url_for('static',filename='js/jasny-bootstrap.js')}}"></script>
+ <!-- ============================================================== -->
 
     <!-- ============================================================== -->
     <!-- Tags page plugins -->
@@ -205,6 +201,7 @@
     <script type="text/javascript" src="{{url_for('static',filename='assets/plugins/multiselect/js/jquery.multi-select.js')}}"></script> -->
     
     <script>
+
     jQuery(document).ready(function() {
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
@@ -312,11 +309,53 @@
         });
    
     </script>
+    <script>
+        $(document).ready(function() {
+            // Basic
+            $('.dropify').dropify();
+    
+            // Translated
+            $('.dropify-fr').dropify({
+                messages: {
+                    default: 'Glissez-déposez un fichier ici ou cliquez',
+                    replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                    remove: 'Supprimer',
+                    error: 'Désolé, le fichier trop volumineux'
+                }
+            });
+    
+            // Used events
+            var drEvent = $('#input-file-events').dropify();
+    
+            drEvent.on('dropify.beforeClear', function(event, element) {
+                return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+            });
+    
+            drEvent.on('dropify.afterClear', function(event, element) {
+                alert('File deleted');
+            });
+    
+            drEvent.on('dropify.errors', function(event, element) {
+                console.log('Has Errors');
+            });
+    
+            var drDestroy = $('#input-file-to-destroy').dropify();
+            drDestroy = drDestroy.data('dropify')
+            $('#toggleDropify').on('click', function(e) {
+                e.preventDefault();
+                if (drDestroy.isDropified()) {
+                    drDestroy.destroy();
+                } else {
+                    drDestroy.init();
+                }
+            })
+        });
+        </script>
 
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{url_for('static',filename='assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
-  </body>
+</body>
 
 </html>
