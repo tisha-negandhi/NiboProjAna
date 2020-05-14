@@ -1,8 +1,9 @@
+import hashlib
 from flask import Flask
-from flask import render_template
+from flask import render_template, request
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def signin():
     return render_template('signin.html')
 
@@ -22,8 +23,8 @@ def proeject():
 def proejectform():
     return render_template('projectform.html')
 
-@app.route("/profile")
-def sam():
+@app.route("/profile", methods = ["GET", "POST"])
+def profile():
     return render_template('profile.html')
 
 if __name__=='__main__':

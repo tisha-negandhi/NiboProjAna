@@ -40,15 +40,17 @@
         <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">        
             <div class="login-box card">
             <div class="card-block">
-                <form class="form-horizontal form-material" id="loginform" action="/blank">
+                <form class="form-horizontal form-material" id="loginform" action="/" method="POST">
                     <h3 class="box-title m-b-20">Sign In</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="Username"> </div>
+                            <input class="form-control" type="email" required="" name="email" placeholder="Enter your Email">
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" type="password" required="" placeholder="Password"> </div>
+                            <input class="form-control" type="password" required="" name="password" placeholder="Password">
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
