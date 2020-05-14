@@ -19,7 +19,7 @@ def blank():
         email = request.form["email"]
         password = request.form["password"]
         password = hashlib.md5(password.encode()).hexdigest()
-        print(password)   
+     
     return render_template('blank.html')
 
 @app.route("/teampage", methods = ["GET" , "POST"]) 
@@ -28,7 +28,7 @@ def teams():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        print(passed_object)   
+       
     return render_template('team.html')
 
 @app.route("/project", methods = ["GET" , "POST"])
@@ -37,7 +37,7 @@ def project():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        print(passed_object) 
+       
     return render_template('project.html')
 
 @app.route("/projectform", methods = ["GET" , "POST"] )
@@ -46,7 +46,7 @@ def projectform():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        print(passed_object) 
+       
     return render_template('projectform.html')
 
 @app.route("/profile", methods = ["GET" , "POST"]) 
@@ -55,7 +55,7 @@ def profile():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        print(passed_object) 
+        
     
     return render_template('profile.html')
 
