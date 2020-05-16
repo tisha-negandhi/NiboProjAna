@@ -1,29 +1,73 @@
+import hashlib
 from flask import Flask
-from flask import render_template
-app = Flask(__name__)
+from flask import render_template,request, url_for, redirect, session
+from flask_pymongo import PyMongo
+import hashlib
 
-@app.route("/")
+app = Flask(__name__)
+app.config.from_object("config.Config")
+
+mongo = PyMongo(app)
+
+@app.route("/", methods = ["GET" , "POST"])
 def signin():
+    if request.method == "POST":
+        if request.form["section_name"] == "login_form":
+            print("inside login form")
+            email=request.form["email"]
+            password=request.form["password"]
+            password = hashlib.md5(password.encode()).hexdigest()
+            print(email,password)
+        if request.form["section_name"] == "forgot_pass":
+            print("inside forgot password")
+            email=request.form["email"]
+            print(email)
+
     return render_template('signin.html')
 
-@app.route("/blank")
+@app.route("/blank",  methods = ["GET" , "POST"] )
 def blank():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        password = hashlib.md5(password.encode()).hexdigest()
+        
     return render_template('blank.html')
 
-@app.route("/teampage")
+@app.route("/teampage", methods = ["GET" , "POST"]) 
 def teams():
+    if request.method == "POST":
+        passed_object = {}
+        for each in request.form:
+            passed_object[each] = request.form[each]
+        print(passed_object)
+       
     return render_template('team.html')
 
-@app.route("/project")
-def proeject():
+@app.route("/project", methods = ["GET" , "POST"])
+def project():
+    if request.method == "POST":
+        passed_object = {}
+        for each in request.form:
+            passed_object[each] = request.form[each]
+       
     return render_template('project.html')
 
-@app.route("/projectform")
-def proejectform():
+@app.route("/projectform", methods = ["GET" , "POST"] )
+def projectform():
+    if request.method == "POST":
+        passed_object = {}
+        for each in request.form:
+            passed_object[each] = request.form[each]
+       
     return render_template('projectform.html')
 
-@app.route("/profile")
-def sam():
+@app.route("/profile", methods = ["GET" , "POST"]) 
+def profile():
+    if request.method == "POST":
+        passed_object = {}
+        for each in request.form:
+            passed_object[each] = request.form[each]
     return render_template('profile.html')
 
 if __name__=='__main__':

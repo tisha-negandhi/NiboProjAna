@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
+    <!-- Favicon icon --> 
     <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static',filename='assets/images/favicon.png')}}">
    
     <title></title>
@@ -93,7 +93,7 @@
                 <!-- ============================================================== -->
                 <button class="btn btn-primary icons" type="button">
                     <a class="active" href="/projectform" style="color: white;">
-                    Add Projects <i class="fas fa-plus"></i></a> 
+                    Add Projects <i class="fa fa-plus"></i></a> 
                   </button>
                   
                 <div class="row" style="margin-top: 20px;">
@@ -325,6 +325,11 @@
    
     </script>
 
+ <!-- Editable -->
+    <script src="{{url_for('static',filename='assets/plugins/jsgrid/db.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='assets/plugins/jsgrid/dist/jsgrid.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/jsgrid-init.js')}}"></script>
+    <!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <script src="{{url_for('static',filename='assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
