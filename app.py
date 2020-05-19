@@ -1,17 +1,15 @@
 import hashlib
 from flask import Flask
-from flask import render_template,request, url_for, redirect, session
-from flask_pymongo import PyMongo
+from flask import render_template,request,url_for,redirect,session
 import hashlib
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 app.config.from_object("config.Config")
 
 mongo = PyMongo(app)
-
 from models import Users
-
-users_object = Users()
+users_object =  Users()
 
 @app.route("/register_user")
 def register_user():
@@ -22,34 +20,27 @@ def register_user():
     pass_object["password"] = hashlib.md5(pass_object["password"].encode()).hexdigest()
     result = users_object.insert_user(data_object=pass_object)
     if result:
-        return "Inserted to database."
+        return "inserted in databse"
     else:
-        return "Failed to insert to database"
+        return "failed to insert"
 
-
-@app.route("/forgot_pass")
-def forgot_pass():
-    if request.method=="POST":
-        email = request.form["email"]
-        # operation to sent email baout forgot password link to reset password
 
 @app.route("/", methods = ["GET" , "POST"])
 def signin():
+    
     if request.method == "POST":
         if request.form["section_name"] == "login_form":
             email = request.form["email"]
             password = request.form["password"]
             password = hashlib.md5(password.encode()).hexdigest()
-            result = users_object.signin_user(email, password)
+            result = users_object.signin_user(email,password)
             if result:
-                return redirect("/blank")
+                return render_template(url_for(blank))
+                # return redirect("/blank")
             else:
-                return render_template("signin.html", context="Email id and password doesn't match.")
+                return render_template("signin.html",context="email id and password does not match")
         if request.form["section_name"] == "forgot_pass":
-            print("inside forgot password")
-            email = request.form["email"]
-            print(email)
-            # operation to sent email baout forgot password link to reset password
+             email = request.form["email"] 
     return render_template('signin.html')
 
 @app.route("/blank",  methods = ["GET" , "POST"] )
@@ -90,9 +81,9 @@ def profile():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        result = users_object.update_profile(email=session["email"], data_object=passed_object)
-    user = users_object.fetch_user(email=session["email"])
-    return render_template('profile.html', user_context=user)
+        result=users_object.update_profile(email=session["email"] ,data_object=passed_object)
+    user = users_object.fetch_user(username=session["email"])
+    return render_template('profile.html',users_context=user)
 
 if __name__=='__main__':
     app.run(debug=True)
