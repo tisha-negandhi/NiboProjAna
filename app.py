@@ -35,7 +35,7 @@ def signin():
             password = hashlib.md5(password.encode()).hexdigest()
             result = users_object.signin_user(email,password)
             if result:
-                return render_template(url_for(blank))
+                return redirect(url_for("blank"))
                 # return redirect("/blank")
             else:
                 return render_template("signin.html",context="email id and password does not match")
