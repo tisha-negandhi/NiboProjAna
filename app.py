@@ -93,7 +93,8 @@ def teams():
             team_id=request.form["team_id"]
             full_name=request.form["full_name"]
             result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
-    return render_template('team.html')
+    res = user_object.fetch_teams()
+    return render_template('team.html',context=res)
 
 @app.route("/project", methods = ["GET" , "POST"])
 @login_required

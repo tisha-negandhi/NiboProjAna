@@ -89,8 +89,6 @@
                         <div class="card">
                             <div class="card-block">
 
-        
-                            
                                 <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#add-team" >Create Team</button>
                                 <div id="add-team" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -159,149 +157,58 @@
                                     </div>
                                     <!-- /.modal-dialog -->
                                 </div>
-
-
+                                <div id="members" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content"> 
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title" id="myModalLabel"></h4> </div>
+                                            <div class="modal-body">
+                                            
+                                            </div>
+                                            
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
 
                                 <h6 class="card-subtitle"></h6>
                                 <div class="table-responsive">
+
                                     <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="5">
+                                       
                                         <thead>
                                             <tr>
-                                                <th>Sr.no.</th>
+                                                <!-- <th>Sr.no.</th> -->
                                                 <th>Team Id.</th>
                                                 <th>Team Name</th>
-                                                <th>Team Leader</th>
-                                                <th>Team Members</th>
+                                                <th>Team Leader</th>                                          
                                                 <th>Project Name</th>
                                                 <th>Project Subject</th>
                                             
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        {% for x in context %}
                                             <tr>
-                                                <td></td>
-                                                <td>
-                                                   
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                
-                                                <td></td>
-                                        
+                                                <td>{{ x["team_id"] }}</td>
+                                                <td><a href="" data-target="#members" data-toggle="modal">{{x["team_name"]}}</a></td>
+                                                <td>{{x["team_leader"]}}</td>
+                                                <td>{{x["project_name"]}}</td>
+                                                <td>{{x["project_subject"]}}</td>
                                             </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                   
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                
-                                                <td></td>
-                                        
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                   
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                
-                                                <td></td>
-                                        
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                   
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                
-                                                <td></td>
-                                        
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                    <a href="profilemainpage.html">lyzol</a>
-                                                </td>
-                                                <td>2344354852</td>
-                                                <td>Soap5</td>
-                                                <td><span class="label label-info">gagan</span> </td>
-                                                
-                                                <td>12-10-2014</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>
-                                                    <a href="profilemainpage.html">bbb</a>
-                                                </td>
-                                                <td>234564442</td>
-                                                <td>Soap6</td>
-                                                <td><span class="label label-info">cathy</span> </td>
-                                                
-                                                <td>25-10-2014</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>
-                                                    <a href="profilemainpage.html">drfgd</a>
-                                                </td>
-                                                <td>2345742</td>
-                                                <td>Soap7</td>
-                                                <td><span class="label label-info">govinda</span> </td>
-                                                
-                                                <td>12-10-2014</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>
-                                                    <a href="profilemainpage.html">dfvss</a>
-                                                </td>
-                                                <td>23425442</td>
-                                                <td>Soap8</td>
-                                                <td><span class="label label-info">abhi</span> </td>
-                                                
-                                                <td>5-10-2014</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>
-                                                    <a href="profilemainpage.html">dsgs</a>
-                                                </td>
-                                                <td>2344565442</td>
-                                                <td>Soap9</td>
-                                                <td><span class="label label-info">vidyut</span> </td>
-                                                
-                                                <td>12-10-2014</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>
-                                                    <a href="profilemainpage.html">sedvs</a>
-                                                </td>
-                                                <td>23534442</td>
-                                                <td>Soap10</td>
-                                                <td><span class="label label-info">deven</span> </td>
-                                                
-                                                <td>16-10-2014</td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
+                                        {% endfor %}
+                                    </tbody>
+                                         <tfoot> 
+                                             <tr>
                                                 
                                                 <td colspan="7">
                                                     <div class="text-right">
                                                         <ul class="pagination"> </ul>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> 
                                         </tfoot>
                                     </table>
                                 </div>
