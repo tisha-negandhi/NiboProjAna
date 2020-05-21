@@ -28,9 +28,9 @@ def login_required(f):
 @app.route("/register_user")
 def register_user():
     pass_dict={}
-    pass_dict["name"]="Valid"
-    pass_dict["email"]="validemail@gmail"
-    pass_dict["password"] = "1234"
+    pass_dict["name"]="Tisha"
+    pass_dict["email"]="tishanegandhi27@gmail.com"
+    pass_dict["password"] = "12345"
     pass_dict["password"] = hashlib.md5(pass_dict["password"].encode()).hexdigest()
     result= user_object.insertfunc(pass_dict)
     if result:
@@ -77,11 +77,22 @@ def blank():
 @login_required
 def teams():
     if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-        print(passed_object)
-       
+        if request.form["section_name"] == "create_team":
+            print("inside create team")
+            passed_object = {}
+            for each in request.form:
+              passed_object[each] = request.form[each]
+            print(passed_object)
+            result= user_object.insert_team(passed_object)
+            team_id=request.form["team_id"]
+            full_name=request.form["team_leader"]
+            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+           
+        if request.form["section_name"] == "join_team":
+            print("inside join team")
+            team_id=request.form["team_id"]
+            full_name=request.form["full_name"]
+            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
     return render_template('team.html')
 
 @app.route("/project", methods = ["GET" , "POST"])

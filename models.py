@@ -11,16 +11,16 @@ class Users:
         session.pop("_id",None)
 
     def signinfunc(self,email,password):
-        
-        result =self.mongo.users.find_one({"$and":[{"email":email }, {"password":password}]})
-        print(result)
-        if result :
+      result =self.mongo.users.find_one({"$and":[{"email":email }, {"password":password}]})
+      print(result)
+      if result :
             session["email"] = result["email"]
             session["logged_in"] = True
             session["id"] = str(result["_id"])
             return True
-        else:
+      else:
             return False
+
     def insertfunc(self,data_dict):
         return self.mongo.users.insert(data_dict)
 
@@ -33,5 +33,9 @@ class Users:
             return True
         else:
             return False
-    def insertteam(self,data_dict):
+
+    def insert_team(self,data_dict):
         return self.mongo.teams.insert(data_dict)
+   
+    def team_update_members(self, full_name,team_id):
+        result=self.mongo.teams.update_one({"team_id":team_id},{"$push":{"team_members":full_name}})

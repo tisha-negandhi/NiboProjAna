@@ -91,7 +91,7 @@
 
         
                             
-                                <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#add-team">Create Team</button>
+                                <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#add-team" >Create Team</button>
                                 <div id="add-team" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -103,27 +103,22 @@
                                                 <form class="form-horizontal form-material" method="POST" action="/teampage">
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team name" name="teamname"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team name" name="team_name"> </div>
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Id." name="teamid"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team Id." name="team_id"> </div>
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Project Name" name="projectname"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team Leader" name="team_leader"> </div>
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Leader" name="teamleader"> </div>
+                                                            <input type="text" class="form-control" placeholder="Project Name" name="project_name"> </div>
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Age" name="age">
-                                                        </div>
-                                                        
-                                                        <div class="form-group">
-                                                            <label>Upload Blackbook PDF</label>
-                                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                                                <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                                                                <input type="hidden">
-                                                                <input type="file" name="blackbook"  > </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" name="file">Remove</a> </div>
+                                                            <input type="text" class="form-control" placeholder="Project Subject" name="project_subject">
                                                         </div>
                                                     </div>
+                                                        
+                                                        
+                                                    
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-info waves-effect">Save</button>
+                                                        <button type="submit" class="btn btn-info waves-effect" name="section_name" value="create_team">Save</button>
                                                         <button type="button" class="btn btn-default waves-effect">Cancel</button>
                                                     </div>
                                                 </form>
@@ -147,12 +142,13 @@
                                                 <form class="form-horizontal form-material" action="/teampage" method="POST" >
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Code" name="teamcode"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team Id" name="team_id"> </div>
+                                                            <input type="text" class="form-control" placeholder="Full name" name="full_name"> </div>
                                                        
                                                        
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-info waves-effect">Join Team</button>
+                                                        <button type="submit" class="btn btn-info waves-effect" name="section_name" value="join_team">Join Team</button>
                                                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </form>
@@ -171,62 +167,64 @@
                                     <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="5">
                                         <thead>
                                             <tr>
-                                                <th>No.</th>
-                                                <th>Team Name</th>
+                                                <th>Sr.no.</th>
                                                 <th>Team Id.</th>
+                                                <th>Team Name</th>
+                                                <th>Team Leader</th>
+                                                <th>Team Members</th>
                                                 <th>Project Name</th>
-                                                <th>Leader</th>
-                                                
-                                                <th>Submission date</th>
-                                                
+                                                <th>Project Subject</th>
                                             
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
+                                                <td></td>
                                                 <td>
-                                                    <a href="profilemainpage.html">Cinthol</a>
+                                                   
                                                 </td>
-                                                <td>23442</td>
-                                                <td>Soap1</td>
-                                                <td><span class="label label-info">Ramlal</span> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 
-                                                <td>12-10-2014</td>
+                                                <td></td>
                                         
                                             </tr>
                                             <tr>
-                                                <td>2</td>
+                                                <td></td>
                                                 <td>
-                                                    <a href="profilemainpage.html">Dove</a>
+                                                   
                                                 </td>
-                                                <td>234542</td>
-                                                <td>Soap2</td>
-                                                <td><span class="label label-info">Raju</span> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 
-                                                <td>21-10-2014</td>
+                                                <td></td>
+                                        
                                             </tr>
                                             <tr>
-                                                <td>3</td>
+                                                <td></td>
                                                 <td>
-                                                    <a href="profilemainpage.html">Dettol</a>
+                                                   
                                                 </td>
-                                                <td>9875</td>
-                                                <td>Soap3</td>
-                                                <td><span class="label label-info">Ramesh</span> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 
-                                                <td>13-10-2014</td>
+                                                <td></td>
+                                        
                                             </tr>
                                             <tr>
-                                                <td>4</td>
+                                                <td></td>
                                                 <td>
-                                                    <a href="profilemainpage.html">Santoor</a>
+                                                   
                                                 </td>
-                                                <td>2345452</td>
-                                                <td>Soap4</td>
-                                                <td><span class="label label-info">jyoti</span> </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 
-                                                <td>23-10-2014</td>
+                                                <td></td>
+                                        
                                             </tr>
                                             <tr>
                                                 <td>5</td>
