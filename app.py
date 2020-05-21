@@ -3,6 +3,7 @@ from flask import Flask
 from flask import render_template,request,url_for,redirect,session
 import hashlib
 from flask_pymongo import PyMongo
+from functools import wraps
 
 app = Flask(__name__)
 app.config.from_object("config.Config")
@@ -10,6 +11,20 @@ app.config.from_object("config.Config")
 mongo = PyMongo(app)
 from models import Users
 users_object =  Users()
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        print('into login required')
+        try:
+            if session["logged_in"] and session["email"]:
+                return f(*args, **kwargs)
+            else:
+                return redirect(url_for("signin"))
+        except Exception as e:
+            print(e)
+            return redirect(url_for("signin"))
+    return wrap
 
 @app.route("/register_user")
 def register_user():
@@ -27,7 +42,7 @@ def register_user():
 
 @app.route("/", methods = ["GET" , "POST"])
 def signin():
-    
+    users_object.logout()
     if request.method == "POST":
         if request.form["section_name"] == "login_form":
             email = request.form["email"]
@@ -44,10 +59,13 @@ def signin():
     return render_template('signin.html')
 
 @app.route("/blank",  methods = ["GET" , "POST"] )
-def blank():     
-    return render_template('blank.html')
+@login_required
+def blank():
+    context = users_object.fetch_all_users()  
+    return render_template('blank.html', all_user = context)
 
 @app.route("/teampage", methods = ["GET" , "POST"]) 
+@login_required
 def teams():
     if request.method == "POST":
         passed_object = {}
@@ -58,6 +76,7 @@ def teams():
     return render_template('team.html')
 
 @app.route("/project", methods = ["GET" , "POST"])
+@login_required
 def project():
     if request.method == "POST":
         passed_object = {}
@@ -67,6 +86,7 @@ def project():
     return render_template('project.html')
 
 @app.route("/projectform", methods = ["GET" , "POST"] )
+@login_required
 def projectform():
     if request.method == "POST":
         passed_object = {}
@@ -76,6 +96,7 @@ def projectform():
     return render_template('projectform.html')
 
 @app.route("/profile", methods = ["GET" , "POST"]) 
+@login_required
 def profile():
     if request.method == "POST":
         passed_object = {}

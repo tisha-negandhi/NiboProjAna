@@ -1,0 +1,51 @@
+Users
+    username(email)
+    phone(phone)
+    user_type(students/seachers)
+    password(password)
+    otp(otp)
+
+Teachers
+    _id ObjectId
+    first_name string
+    last_name string
+    email string
+    phone int32
+    teacher_subject string
+
+Students
+    first_name string
+    last_name string
+    email ObjectId
+    phone [int32]
+    department string
+    division string
+    enrollment_no string 
+    roll_no string
+    scheme string
+    year string
+
+Teams
+    _id ObjectId
+    team_name string
+    team_leader {name:"name", email:"emailid"}/{name:"name", id:"_id of the leader"}
+    team_members array["kunjshah@gmail.com","johndoe@gmail.com"]
+    project_name
+    project_subject
+
+subject_project
+    _id ObjectId
+    subject_name string
+    submission_date date
+    subject_teacher
+
+Project
+    _id ObjectId
+    team_id
+    project_subject
+    project_title
+    project_description
+    tags array
+    youtube_link
+    github_link
+    files  array[{"filename":"abc.txt", "link", "/users/ankfs/wEFc/fae/abc.txt"}]

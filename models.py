@@ -5,6 +5,11 @@ class Users:
     def __init__(self):
         self.mongo = mongo.db
     
+    def logout(self):
+        session.pop("email",None)
+        session.pop("id",None)
+        session.pop("logged_in",False)
+    
     def signin_user(self,email,password):
         login_result = self.mongo.users.find_one({"$and":[{"email": email},{"password": password}]})
         if login_result:
@@ -27,3 +32,6 @@ class Users:
             return True
         else:
             return False
+        
+    def fetch_all_users(self):
+        return self.mongo.users.find()
