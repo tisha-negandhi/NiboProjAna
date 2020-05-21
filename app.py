@@ -25,18 +25,37 @@ def login_required(f):
 
     return wrap
 		
-@app.route("/register_user")
+@app.route("/register_user",methods = ["GET" , "POST"])
 def register_user():
-    pass_dict={}
-    pass_dict["name"]="Tisha"
-    pass_dict["email"]="tishanegandhi27@gmail.com"
-    pass_dict["password"] = "12345"
-    pass_dict["password"] = hashlib.md5(pass_dict["password"].encode()).hexdigest()
-    result= user_object.insertfunc(pass_dict)
-    if result:
-        return "Inserted"
-    else :
-        return "Failure"
+    if request.method == "POST":
+        if request.form["section_name"] == "reg_form":
+            passed_object = {}
+            passed_object["name"]=request.form["name"]
+            passed_object["email"]=request.form["email"]
+            passed_object["phone"]=request.form["phone"]
+            passed_object["usertype"]=request.form["user_type"]
+            password=request.form["password"]
+            cpass=request.form["confirmpass"]
+            passed_object["password"] = hashlib.md5(password.encode()).hexdigest()
+            passed_object["cpass"] = hashlib.md5(password.encode()).hexdigest()
+            if passed_object["usertype"]=="student":
+             result= user_object.insert_student(passed_object)
+            else:
+             result= user_object.insert_teacher(passed_object)
+           
+           
+                
+                
+            if result:
+               return redirect('/')
+            else :
+               return render_template("register.html")
+
+
+            
+     
+    return render_template('register.html')
+    
 
 
 
