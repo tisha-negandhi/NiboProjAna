@@ -11,7 +11,7 @@ class Users:
         session.pop("_id",None)
 
     def signinfunc(self,email,password):
-      result =self.mongo.reg.find_one({"$and":[{"email":email }, {"password":password}]})
+      result =self.mongo.users.find_one({"$and":[{"email":email }, {"password":password}]})
       print(result)
       if result :
             session["email"] = result["email"]
@@ -22,13 +22,17 @@ class Users:
             return False
 
     def insertfunc(self,data_dict):
-        return self.mongo.reg.insert(data_dict)
+        result = self.mongo.users.insert(data_dict)
+        if result:
+            return True
+        else:
+            return False
 
     def fetch_user(self, username):
-        return self.mongo.reg.find_one({"email":username})
+        return self.mongo.users.find_one({"email":username})
 
     def update_profile(self,data_object,email):
-        result = self.mongo.reg.update_one({"email":email},{"$set":data_object})
+        result = self.mongo.users.update_one({"email":email},{"$set":data_object})
         if result:
             return True
         else:

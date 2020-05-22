@@ -38,6 +38,7 @@ def register_user():
             cpass=request.form["confirmpass"]
             passed_object["password"] = hashlib.md5(password.encode()).hexdigest()
             passed_object["cpass"] = hashlib.md5(password.encode()).hexdigest()
+            res = user_object.insertfunc(passed_object)
             if passed_object["usertype"]=="student":
              result= user_object.insert_student(passed_object)
             else:
@@ -46,8 +47,8 @@ def register_user():
            
                 
                 
-            if result:
-               return redirect('/')
+            if res:
+               return render_template("signin.html",message="Registation successful")
             else :
                return render_template("register.html")
 
@@ -74,7 +75,7 @@ def signin():
             if result:
                return redirect('/blank')
             else :
-               return render_template("signin.html",message="Password Galat hai")
+               return render_template("signin.html",context="Incorrect email or password")
         if request.form["section_name"] == "forgot_pass":
             print("inside forgot password")
             email=request.form["email"]
