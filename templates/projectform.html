@@ -103,7 +103,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="card-title">Project Add/Edit Form</h4>
-                                <form class="form-material m-t-40" method="POST" action="/project">
+                                <form class="form-material m-t-40" method="POST" action="/projectform">
                                     <div class="form-group">
                                         <label> <span class="help"> Project Title</span></label>
                                         <input type="text" class="form-control form-control-line" name="title">
@@ -124,22 +124,21 @@
 
                                     <div class="form-group" class="form-control">
                                         <label>Youtube video link</label>
-                                        <input type="text" class="form-control form-control-line" name="youtube">
+                                        <input type="url" class="form-control form-control-line" name="youtube">
                                     </div>
                                     <div class="form-group" class="form-control">
                                         <label>Git hub link</label>
-                                        <input type="text" class="form-control form-control-line" name="github">
+                                        <input type="url" class="form-control form-control-line" name="github">
                                     </div>
 
-                                    <!-- <div class="form-group">
+                                    <div class="form-group">
                                                             <label>File upload</label>
                                                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                                                 <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
                                                                 <input type="hidden">
                                                                 <input type="file" name="projectfiles"> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" name="file">Remove</a> </div>
-                                                        </div> -->
-                                    <button class="btn btn-success" type="submit" name="section_name"
-                                        value="sub_proj">Submit</button>
+                                                        </div> 
+                                    <button class="btn btn-success" type="submit" name="section_name" value="sub_proj">Submit</button>
                                     <button class="btn btn-success" type="submit">Cancel</button>
                                 </form>
 
