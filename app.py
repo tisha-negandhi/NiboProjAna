@@ -104,13 +104,14 @@ def teams():
             team_id=request.form["team_id"]
             full_name=request.form["team_leader"]
             result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            return redirect(url_for('teams'))
            
         if request.form["section_name"] == "join_team":
             print("inside join team")
             team_id=request.form["team_id"]
             full_name=request.form["full_name"]
             r=user_object.team_check(team_id=team_id)
-            if r==True:
+            if r:
                 result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
             else:
                 return redirect (url_for('teams'))
