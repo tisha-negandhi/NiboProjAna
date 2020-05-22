@@ -43,9 +43,6 @@ def register_user():
              result= user_object.insert_student(passed_object)
             else:
              result= user_object.insert_teacher(passed_object)
-           
-           
-                
                 
             if res:
                return render_template("signin.html",message="Registation successful")
@@ -112,7 +109,11 @@ def teams():
             print("inside join team")
             team_id=request.form["team_id"]
             full_name=request.form["full_name"]
-            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            r=user_object.team_check(team_id=team_id)
+            if r==True:
+                result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            else:
+                return redirect (url_for('teams'))
     res = user_object.fetch_teams()
     return render_template('team.html',context=res)
 

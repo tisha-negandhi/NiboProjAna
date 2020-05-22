@@ -48,7 +48,15 @@ class Users:
         return self.mongo.teachers.insert(data_dict)
    
     def team_update_members(self, full_name,team_id):
+
         result =self.mongo.teams.update_one({"team_id":team_id},{"$push":{"team_members":full_name}})
+    def team_check(self,team_id):
+         result = self.mongo.teams.find_one({"team_id":team_id})
+         if len(result["team_members"]) < 4:
+            return True
+         else:
+            return False
+
     def fetch_teams(self):
         return self.mongo.teams.find()
         
