@@ -103,37 +103,38 @@ def teams():
             for each in request.form:
               passed_object[each] = request.form[each]
             print(passed_object)
-            result= user_object.insert_team(passed_object)
+            user_object.insert_team(passed_object)
             team_id=request.form["team_id"]
             full_name=request.form["team_leader"]
-            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            user_object.team_update_members(full_name=full_name,team_id=team_id)
            
         if request.form["section_name"] == "join_team":
             print("inside join team")
             team_id=request.form["team_id"]
             full_name=request.form["full_name"]
-            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            user_object.team_update_members(full_name=full_name,team_id=team_id)
     res = user_object.fetch_teams()
     return render_template('team.html',context=res)
 
 @app.route("/project", methods = ["GET" , "POST"])
 @login_required
 def project():
-    if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-       
-    return render_template('project.html')
+    result = user_object.print_projects()
+    return render_template('project.html',result=result)
 
 @app.route("/projectform", methods = ["GET" , "POST"] )
 @login_required
 def projectform():
+    print("inside project1")
     if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-       
+        print("inside projectform")
+        if request.form["section_name"] == "sub_proj":
+            print("inside projectform")
+            passed_object = {}        
+            for each in request.form:
+                passed_object[each] = request.form[each]
+            print(passed_object)
+            user_object.insert_projects(data_dict=passed_object)
     return render_template('projectform.html')
 
 @app.route("/profile", methods = ["GET" , "POST"]) 
@@ -143,7 +144,7 @@ def profile():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        result=user_object.update_profile(email=session["email"] ,data_object=passed_object)
+        user_object.update_profile(email=session["email"] ,data_object=passed_object)
     user = user_object.fetch_user(username=session["email"])
     return render_template('profile.html',users_context=user)
    

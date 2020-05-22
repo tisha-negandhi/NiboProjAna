@@ -48,8 +48,14 @@ class Users:
         return self.mongo.teachers.insert(data_dict)
    
     def team_update_members(self, full_name,team_id):
-        result =self.mongo.teams.update_one({"team_id":team_id},{"$push":{"team_members":full_name}})
+        return self.mongo.teams.update_one({"team_id":team_id},{"$push":{"team_members":full_name}})
     def fetch_teams(self):
         return self.mongo.teams.find()
+    
+    def insert_projects(self,data_dict):
+        print(data_dict)
+        return self.mongo.projects.insert(data_dict)
+    def print_projects(self):
+        return self.mongo.projects.find()
         
       
