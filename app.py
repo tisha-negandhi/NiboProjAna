@@ -4,7 +4,7 @@ from flask import render_template,request, url_for, redirect, session
 from flask_pymongo import PyMongo
 import hashlib
 from functools import wraps
-
+import random
 
 
 app = Flask(__name__)
@@ -45,9 +45,10 @@ def register_user():
              result= user_object.insert_teacher(passed_object)
                 
             if res:
-               return render_template("signin.html",message="Registation successful")
+                flash("registration successful")
+                return redirect (url_for('signin'))
             else :
-               return render_template("register.html")
+                return redirect (url_for('register_user'))
 
 
             
@@ -100,10 +101,11 @@ def teams():
             for each in request.form:
               passed_object[each] = request.form[each]
               passed_object["team_leader"] = session["name"]
+              passed_object["team_id"] = random.getrandbits(16)
+              passed_object["team_id"]=str(passed_object["team_id"])
             print(passed_object)
             user_object.insert_team(passed_object)
-            team_id=request.form["team_id"]
-            result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
+            result1=user_object.team_update_members(email=session["email"],team_id=passed_object["team_id"],name=session["name"])
             return redirect(url_for('teams'))
            
         if request.form["section_name"] == "join_team":
@@ -114,7 +116,7 @@ def teams():
                 result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
                 return redirect (url_for('teams'))
             else:
-                flash("this team is already full")
+                flash("u r already a member of this team or this team is full")
                 return redirect (url_for('teams'))
     res = user_object.fetch_teams()
     return render_template('team.html',context=res)

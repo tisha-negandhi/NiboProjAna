@@ -40,8 +40,13 @@
         <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">        
             <div class="login-box card">
             <div class="card-block">
-                <p style="color: red;">{{ context }} </p>
-                <p style="color: red;">{{ message }} </p>
+                {% with messages = get_flashed_messages() %} 
+                {% if messages %}
+                      {% for message in messages %} 				
+                       <p style="color: crimson;">{{message}}</p>
+                       {% endfor %}
+                         {% endif %}
+                               {% endwith %}
                 <form class="form-horizontal form-material" id="loginform" action="/" method="POST">
                     <h3 class="box-title m-b-20">Sign In</h3>
                     <div class="form-group ">

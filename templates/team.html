@@ -115,15 +115,12 @@
                                                 <form class="form-horizontal form-material" method="POST" action="/teampage">
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team name" name="team_name"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team name" name="team_name"required> </div>
+                                                        
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Id." name="team_id"> </div>
-                                                        <!-- <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Leader" name="team_leader"> </div> -->
+                                                            <input type="text" class="form-control" placeholder="Project Name" name="project_name" required> </div>
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Project Name" name="project_name"> </div>
-                                                        <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Project Subject" name="project_subject">
+                                                            <input type="text" class="form-control" placeholder="Project Subject" name="project_subject" required>
                                                         </div>
                                                     </div>
                                                         
@@ -154,7 +151,7 @@
                                                 <form class="form-horizontal form-material" action="/teampage" method="POST" >
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Id" name="team_id"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team Id" name="team_id" required> </div>
                                                             <!-- <input type="text" class="form-control" placeholder="Full name" name="full_name"> </div>
                                                         -->
                                                        
@@ -277,8 +274,7 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{url_for('static',filename='assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
-    
-
+  
 
 
     <!-- ============================================================== -->

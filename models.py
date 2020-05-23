@@ -52,10 +52,10 @@ class Users:
         return self.mongo.teams.update_one({"team_id":team_id},{"$push":{"email":email,"team_members":name}})
     def team_check(self,team_id):
          result = self.mongo.teams.find_one({"team_id":team_id})
-         if len(result["team_members"]) < 4:
-            return True
+         if len(result["team_members"]) < 4 and session["name"] not in result["team_members"]:
+             return True
          else:
-            return False
+             return False
 
     def fetch_teams(self):
         return self.mongo.teams.find()
