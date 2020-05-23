@@ -82,13 +82,26 @@
                             <li class="breadcrumb-item active">Team</li>
                         </ol>
                     </div>
-        
                 </div>
+                    <div class="container" style="min-height:100% width:80%"> 
+                            {% with messages = get_flashed_messages() %} 
+                                 {% if messages %}
+                                  	 {% for message in messages %} 		
+                             <div class="alert alert-warning alert-dismissible" role="alert"> 		
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                         </button> 		
+                                        {{message}} 
+                                    </div>
+                                        {% endfor %}
+                                          {% endif %}
+                                                {% endwith %}
+                                            </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-block">
-                                <!-- <p style="color: crimson;">{{mes}}</p> -->
+                        
 
                                 <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#add-team" >Create Team</button>
                                 <div id="add-team" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -105,8 +118,8 @@
                                                             <input type="text" class="form-control" placeholder="Team name" name="team_name"> </div>
                                                         <div class="col-md-12 m-b-20">
                                                             <input type="text" class="form-control" placeholder="Team Id." name="team_id"> </div>
-                                                        <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Leader" name="team_leader"> </div>
+                                                        <!-- <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Team Leader" name="team_leader"> </div> -->
                                                         <div class="col-md-12 m-b-20">
                                                             <input type="text" class="form-control" placeholder="Project Name" name="project_name"> </div>
                                                         <div class="col-md-12 m-b-20">
@@ -118,7 +131,7 @@
                                                     
                                                     <div class="modal-footer">
                                                         <button type="submit" class="btn btn-lg waves-effect waves-light btn-success" name="section_name" value="create_team">Save</button>
-                                                        <button type="button" class="btn btn-lg waves-effect waves-light btn-success">Cancel</button>
+                                                        <button type="button" class="btn btn-lg waves-effect waves-light btn-success" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -142,8 +155,8 @@
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
                                                             <input type="text" class="form-control" placeholder="Team Id" name="team_id"> </div>
-                                                            <input type="text" class="form-control" placeholder="Full name" name="full_name"> </div>
-                                                       
+                                                            <!-- <input type="text" class="form-control" placeholder="Full name" name="full_name"> </div>
+                                                        -->
                                                        
                                                     </div>
                                                     <div class="modal-footer">
@@ -181,7 +194,7 @@
                                         {% for x in context %}
                                             <tr>
                                                 <td>{{ x["team_id"] }}</td>
-                                                <td><a href="#" title="Team members" data-toggle="popover" data-placement="top" data-content="{{x["team_members"]}}">{{x["team_name"]}}</a>
+                                                <td><a href="#" title="Team members" data-toggle="popover" data-placement="top" data-content="{{x["team_members"],x["email"]}}">{{x["team_name"]}}</a>
                                                 </td>
                                                 <td>{{x["team_leader"]}}</td>
                                                 <td>{{x["project_name"]}}</td>

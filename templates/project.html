@@ -117,39 +117,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td> </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td> </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td> </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td> </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            {% for x in result %}
+                                                <tr>
+                                                    <td>{{x["title"] }}</td>
+                                                    <td>{{x["description"] }}</td>
+                                                    <td> <span class="label label-info">{{x["tags"] }}</span></td>
+                                                    <td><span class="label label-success">{{x["github"] }}</span></td>
+                                                    <td><span class="label label-danger">{{x["youtube"] }}</span></td>
+                                                    <td>{{x["projectfiles"] }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            
                                         </tbody>
+                                          <tfoot> 
+                                             <tr>
+                                                
+                                                <td colspan="7">
+                                                   <div class="text-right">
+                                                       <ul class="pagination"> </ul>
+                                                   </div>
+                                                </td>
+                                             </tr> 
+                                       </tfoot>
                                     </table>
                                 </div>
                             </div>

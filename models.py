@@ -15,6 +15,7 @@ class Users:
       print(result)
       if result :
             session["email"] = result["email"]
+            session["name"] = result["name"]
             session["logged_in"] = True
             session["id"] = str(result["_id"])
             return True
@@ -47,9 +48,8 @@ class Users:
     def insert_teacher(self,data_dict):
         return self.mongo.teachers.insert(data_dict)
    
-    def team_update_members(self, full_name,team_id):
-
-        result =self.mongo.teams.update_one({"team_id":team_id},{"$push":{"team_members":full_name}})
+    def team_update_members(self,team_id,email,name):
+        return self.mongo.teams.update_one({"team_id":team_id},{"$push":{"email":email,"team_members":name}})
     def team_check(self,team_id):
          result = self.mongo.teams.find_one({"team_id":team_id})
          if len(result["team_members"]) < 4:
@@ -59,5 +59,10 @@ class Users:
 
     def fetch_teams(self):
         return self.mongo.teams.find()
+    
+    def insert_projects(self,data_dict):
+        return self.mongo.projects.insert(data_dict)
+    def print_projects(self):
+        return self.mongo.projects.find()
         
       
