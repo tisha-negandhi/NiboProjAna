@@ -3,25 +3,27 @@ from flask import session
 
 class Users:
     def __init__(self):
-        self.mongo = mongo.db
+        self.mongo= mongo.db
     
     def logout(self):
         session.pop("email",None)
+        session.pop("logged_in",None)
         session.pop("id",None)
-        session.pop("logged_in",False)
-    
-    def signin_user(self,email,password):
-        login_result = self.mongo.users.find_one({"$and":[{"email": email},{"password": password}]})
-        if login_result:
-            session["email"] = login_result["email"]
+
+    def signinfunc(self,email,password):
+        
+        result = self.mongo.users.find_one({"$and":[{"email":email }, {"password":password}]})
+        print(result)
+        if result :
+            session["email"] = result["email"]
             session["logged_in"] = True
-            session["id"] = str(login_result["_id"])
+            session["id"] = str(result["_id"])
             return True
         else:
             return False
-    
-    def insert_user(self,data_object):
-        return self.mongo.users.insert(data_object)
+
+    def insertfunc(self,data_dict):
+        return self.mongo.users.insert(data_dict)
 
     def fetch_user(self, username):
         return self.mongo.users.find_one({"email":username})
@@ -32,6 +34,6 @@ class Users:
             return True
         else:
             return False
-        
-    def fetch_all_users(self):
-        return self.mongo.users.find()
+
+    def insertteam(self,data_dict):
+        return self.mongo.teams.insert(data_dict)

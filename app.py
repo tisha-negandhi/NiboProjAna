@@ -1,68 +1,74 @@
 import hashlib
-from flask import Flask
-from flask import render_template,request,url_for,redirect,session
-import hashlib
+from flask import Flask,flash
+from flask import render_template,request, url_for, redirect, session
 from flask_pymongo import PyMongo
+import hashlib
 from functools import wraps
+
+
 
 app = Flask(__name__)
 app.config.from_object("config.Config")
 
 mongo = PyMongo(app)
 from models import Users
-users_object =  Users()
+user_object= Users()
 
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        print('into login required')
-        try:
-            if session["logged_in"] and session["email"]:
-                return f(*args, **kwargs)
-            else:
-                return redirect(url_for("signin"))
-        except Exception as e:
-            print(e)
-            return redirect(url_for("signin"))
-    return wrap
+        if 'logged_in' in session and session['logged_in']:
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login first")
+            return redirect(url_for('signin'))
 
+    return wrap
+		
 @app.route("/register_user")
 def register_user():
-    pass_object = {}
-    pass_object["full_name"] = "John Doe"
-    pass_object["email"] = "johndoe@gmail.com"
-    pass_object["password"] = "12345"
-    pass_object["password"] = hashlib.md5(pass_object["password"].encode()).hexdigest()
-    result = users_object.insert_user(data_object=pass_object)
+    pass_dict={}
+    pass_dict["name"]="Nishant Dubey"
+    pass_dict["email"]="a@gmail"
+    pass_dict["password"] = "1234"
+    pass_dict["password"] = hashlib.md5(pass_dict["password"].encode()).hexdigest()
+    result= user_object.insertfunc(pass_dict)
     if result:
-        return "inserted in databse"
-    else:
-        return "failed to insert"
+        return "Inserted"
+    else :
+        return "Failure"
 
 
 @app.route("/", methods = ["GET" , "POST"])
 def signin():
-    users_object.logout()
+    user_object.logout()
     if request.method == "POST":
         if request.form["section_name"] == "login_form":
-            email = request.form["email"]
-            password = request.form["password"]
+            print("inside login form")
+            email=request.form["email"]
+            password=request.form["password"]
             password = hashlib.md5(password.encode()).hexdigest()
-            result = users_object.signin_user(email,password)
+            result = user_object.signinfunc(email,password)
             if result:
-                return redirect(url_for("blank"))
-                # return redirect("/blank")
-            else:
-                return render_template("signin.html",context="email id and password does not match")
+               return redirect('/blank')
+            else :
+               return render_template("signin.html",message="Password Galat hai")
         if request.form["section_name"] == "forgot_pass":
-             email = request.form["email"] 
+            print("inside forgot password")
+            email=request.form["email"]
+            print(email)
+
     return render_template('signin.html')
 
 @app.route("/blank",  methods = ["GET" , "POST"] )
 @login_required
 def blank():
-    context = users_object.fetch_all_users()  
-    return render_template('blank.html', all_user = context)
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        password = hashlib.md5(password.encode()).hexdigest()
+        
+    return render_template('blank.html')
 
 @app.route("/teampage", methods = ["GET" , "POST"]) 
 @login_required
@@ -102,9 +108,9 @@ def profile():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        result=users_object.update_profile(email=session["email"] ,data_object=passed_object)
-    user = users_object.fetch_user(username=session["email"])
+        result=user_object.update_profile(email=session["email"] ,data_object=passed_object)
+    user = user_object.fetch_user(username=session["email"])
     return render_template('profile.html',users_context=user)
-
+   
 if __name__=='__main__':
     app.run(debug=True)
