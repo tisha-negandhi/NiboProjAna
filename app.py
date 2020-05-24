@@ -24,7 +24,8 @@ def login_required(f):
             return redirect(url_for('signin'))
 
     return wrap
-		
+
+
 @app.route("/register_user")
 def register_user():
     pass_dict={}
