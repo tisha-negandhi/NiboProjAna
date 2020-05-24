@@ -29,15 +29,16 @@ def register_user():
     if request.method == "POST":
         if request.form["section_name"] == "reg_form":
             passed_object = {}
+            passed_object["name"]=request.form["name"]
             passed_object["email"]=request.form["email"]
             passed_object["phone"]=request.form["phone"]
-            passed_object["usertype"]=request.form["user_type"]
+            passed_object["usertype"]=request.form["usertype"]
             passed_object["password"] = hashlib.md5(request.form["password"].encode()).hexdigest()
-            
+            print(passed_object)
             res = user_object.insertfunc(passed_object)
 
-            passed_object["name"]=request.form["name"]
-            result= user_object.insert_user_type(passed_object, table_name = passed_object["usertype"])    
+           
+            result= user_object.insert_user_type(data_dict=passed_object, table_name = passed_object["usertype"])    
             if res:
                 flash("registration successful")
                 return redirect (url_for('signin'))
@@ -45,6 +46,7 @@ def register_user():
                 return redirect (url_for('register_user'))           
      
     return render_template('register.html')
+
     
 
 
@@ -100,8 +102,10 @@ def teams():
         if request.form["section_name"] == "join_team":
             print("inside join team")
             team_id=request.form["team_id"]
-            r=result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
+            r = user_object.team_check(team_id=team_id)
+            
             if r:
+                result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
                 return redirect (url_for('teams'))
             else:
                 flash("u r already a member of this team or this team is full")
@@ -137,7 +141,7 @@ def profile():
         for each in request.form:
             passed_object[each] = request.form[each]
         user_object.update_profile(email=session["email"] ,data_object=passed_object, usertype = session["usertype"])
-    user = user_object.fetch_user(username=session["email"],usertype = session["usertype"])
+    user = user_object.fetch_user(email=session["email"],usertype = session["usertype"])
     return render_template('profile.html',users_context=user)
    
 if __name__=='__main__':

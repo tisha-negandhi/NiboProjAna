@@ -26,6 +26,7 @@
      <link href="{{url_for('static',filename='assets/plugins/footable/css/footable.core.css')}}" rel="stylesheet">
      <link href="{{url_for('static',filename='assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
     <!-- Custom CSS -->
+  
     <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{url_for('static',filename='css/colors/blue.css')}}" id="theme" rel="stylesheet">
@@ -83,7 +84,7 @@
                         </ol>
                     </div>
                 </div>
-                    <div class="container" style="min-height:100% width:80%"> 
+                    <div class="container"> 
                             {% with messages = get_flashed_messages() %} 
                                  {% if messages %}
                                   	 {% for message in messages %} 		
@@ -183,7 +184,7 @@
                                                 <th>Team Leader</th>                                          
                                                 <th>Project Name</th>
                                                 <th>Project Subject</th>
-                                                <th></th>
+                                                
                                             
                                             </tr>
                                         </thead>
@@ -191,7 +192,7 @@
                                         {% for x in context %}
                                             <tr>
                                                 <td>{{ x["team_id"] }}</td>
-                                                <td><a href="#" title="Team members" data-toggle="popover" data-placement="top" data-content="{{x["team_members"],x["email"]}}">{{x["team_name"]}}</a>
+                                                <td><a href="#" title="Team members" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{x["team_members"],x["email"]}}">{{x["team_name"]}}</a>
                                                 </td>
                                                 <td>{{x["team_leader"]}}</td>
                                                 <td>{{x["project_name"]}}</td>
