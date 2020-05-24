@@ -23,7 +23,34 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 </head>
+<script>
+    function checkPassword(form) { 
+        password = form.password.value; 
+        confirmpass = form.confirmpass.value; 
+
+        // If password not entered 
+        if (password == '') 
+            alert ("Please enter Password"); 
+              
+        // If confirm password not entered 
+        else if (confirmpass == '') 
+            alert ("Please enter confirm password"); 
+              
+        // If Not same return False.     
+        else if (password != confirmpass) { 
+            alert ("\nPassword did not match: Please try again...") 
+            return false; 
+        } 
+
+        // If same return True. 
+        else{ 
+            alert("Password Match: Welcome to NPA!") 
+            return true; 
+        } 
+    } 
+</script>
 
 
 <body>
@@ -38,15 +65,16 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">        
-            <div class="login-box card">
+        
+        <div class="login-register" > 
+            <div class="login-box card" >
             <div class="card-block">
-                <p style="color: red;">{{ context }} </p>
-                <form class="form-horizontal form-material" id="regform" action="/register_user" method="POST" >
+                
+             <form class="form-horizontal form-material" id="regform" action="/register_user" method="POST" onSubmit = "return checkPassword(this)">
                     <h3 class="box-title m-b-20">Sign Up</h3>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" name="name" type="text" required="" placeholder="Name">
+                            <input class="form-control" name="name" type="text" required="" placeholder="Full Name">
                         </div>
                     </div>
                     <div class="form-group ">
@@ -61,7 +89,12 @@
                     </div>
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control" name="user_type" type="text" required="" placeholder="User Type(student/teacher)">
+                            <!-- <input class="form-control" name="user_type" type="text" required="" placeholder="User Type(student/teacher)"> -->
+                            <select class="form-control form-control-line" name="user_type" placeholder="User Type" required>
+                                <option >student</option>
+                                <option >teacher</option>
+                                
+                            </select>
                         </div>
                     </div>
                     <div class="form-group ">
@@ -89,10 +122,9 @@
                     </div>
                     
                 </form>
-                
-            </div>
-          </div>
         </div>
+        </div>
+      </div>
         
     </section>
     <!-- ============================================================== -->
@@ -120,6 +152,7 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{url_for('static',filename='assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+   
 </body>
 
 </html>

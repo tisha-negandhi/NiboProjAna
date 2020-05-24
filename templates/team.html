@@ -82,12 +82,26 @@
                             <li class="breadcrumb-item active">Team</li>
                         </ol>
                     </div>
-        
                 </div>
+                    <div class="container" style="min-height:100% width:80%"> 
+                            {% with messages = get_flashed_messages() %} 
+                                 {% if messages %}
+                                  	 {% for message in messages %} 		
+                             <div class="alert alert-warning alert-dismissible" role="alert"> 		
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                         </button> 		
+                                        {{message}} 
+                                    </div>
+                                        {% endfor %}
+                                          {% endif %}
+                                                {% endwith %}
+                                            </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-block">
+                        
 
                                 <button type="button" class="btn btn-lg waves-effect waves-light btn-success"data-toggle="modal" data-target="#add-team" >Create Team</button>
                                 <div id="add-team" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -101,23 +115,20 @@
                                                 <form class="form-horizontal form-material" method="POST" action="/teampage">
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team name" name="team_name"> </div>
+                                                            <input type="text" class="form-control" placeholder="Team name" name="team_name"required> </div>
+                                                        
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Id." name="team_id"> </div>
+                                                            <input type="text" class="form-control" placeholder="Project Name" name="project_name" required> </div>
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Leader" name="team_leader"> </div>
-                                                        <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Project Name" name="project_name"> </div>
-                                                        <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Project Subject" name="project_subject">
+                                                            <input type="text" class="form-control" placeholder="Project Subject" name="project_subject" required>
                                                         </div>
                                                     </div>
                                                         
                                                         
                                                     
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-info waves-effect" name="section_name" value="create_team">Save</button>
-                                                        <button type="button" class="btn btn-default waves-effect">Cancel</button>
+                                                        <button type="submit" class="btn btn-lg waves-effect waves-light btn-success" name="section_name" value="create_team">Save</button>
+                                                        <button type="button" class="btn btn-lg waves-effect waves-light btn-success" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -140,14 +151,14 @@
                                                 <form class="form-horizontal form-material" action="/teampage" method="POST" >
                                                     <div class="form-group">
                                                         <div class="col-md-12 m-b-20">
-                                                            <input type="text" class="form-control" placeholder="Team Id" name="team_id"> </div>
-                                                            <input type="text" class="form-control" placeholder="Full name" name="full_name"> </div>
-                                                       
+                                                            <input type="text" class="form-control" placeholder="Team Id" name="team_id" required> </div>
+                                                            <!-- <input type="text" class="form-control" placeholder="Full name" name="full_name"> </div>
+                                                        -->
                                                        
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-info waves-effect" name="section_name" value="join_team">Join Team</button>
-                                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-lg waves-effect waves-light btn-success" name="section_name" value="join_team">Join Team</button>
+                                                        <button type="button" class="btn btn-lg waves-effect waves-light btn-success" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -157,21 +168,7 @@
                                     </div>
                                     <!-- /.modal-dialog -->
                                 </div>
-                                <div id="members" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content"> 
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title" id="myModalLabel"></h4> </div>
-                                            <div class="modal-body">
-                                            
-                                            </div>
-                                            
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
+                                
 
                                 <h6 class="card-subtitle"></h6>
                                 <div class="table-responsive">
@@ -186,6 +183,7 @@
                                                 <th>Team Leader</th>                                          
                                                 <th>Project Name</th>
                                                 <th>Project Subject</th>
+                                                <th></th>
                                             
                                             </tr>
                                         </thead>
@@ -193,10 +191,12 @@
                                         {% for x in context %}
                                             <tr>
                                                 <td>{{ x["team_id"] }}</td>
-                                                <td><a href="" data-target="#members" data-toggle="modal">{{x["team_name"]}}</a></td>
+                                                <td><a href="#" title="Team members" data-toggle="popover" data-placement="top" data-content="{{x["team_members"],x["email"]}}">{{x["team_name"]}}</a>
+                                                </td>
                                                 <td>{{x["team_leader"]}}</td>
                                                 <td>{{x["project_name"]}}</td>
                                                 <td>{{x["project_subject"]}}</td>
+                                                <td></td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
@@ -243,9 +243,11 @@
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
+
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+
     <script src="{{url_for('static',filename='assets/plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{url_for('static',filename='assets/plugins/dropify/dist/js/dropify.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/jasny-bootstrap.js')}}"></script>
@@ -272,8 +274,7 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{url_for('static',filename='assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
-    
-
+  
 
 
     <!-- ============================================================== -->

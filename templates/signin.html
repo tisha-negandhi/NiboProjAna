@@ -40,7 +40,13 @@
         <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">        
             <div class="login-box card">
             <div class="card-block">
-                <p style="color: red;">{{ context }} </p>
+                {% with messages = get_flashed_messages() %} 
+                {% if messages %}
+                      {% for message in messages %} 				
+                       <p style="color: crimson;">{{message}}</p>
+                       {% endfor %}
+                         {% endif %}
+                               {% endwith %}
                 <form class="form-horizontal form-material" id="loginform" action="/" method="POST">
                     <h3 class="box-title m-b-20">Sign In</h3>
                     <div class="form-group ">
@@ -73,10 +79,10 @@
                     </div>
                     <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
-                            <p>Don't have an account? <a href="register.html" class="text-info m-l-5"><button class="btn btn-primary icons" type="button">
-                                <a class="active" href="/register_user" style="color: white;">
-                                Sign Up</a> 
-                              </button></a></p>
+                            <p>Don't have an account? <a href="/register_user" class="text-info m-l-5">
+                            
+                                Sign Up
+                              </a></p>
                         </div>
                     </div>
                 </form>

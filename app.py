@@ -4,7 +4,7 @@ from flask import render_template,request, url_for, redirect, session
 from flask_pymongo import PyMongo
 import hashlib
 from functools import wraps
-
+import random
 
 
 app = Flask(__name__)
@@ -38,18 +38,17 @@ def register_user():
             cpass=request.form["confirmpass"]
             passed_object["password"] = hashlib.md5(password.encode()).hexdigest()
             passed_object["cpass"] = hashlib.md5(password.encode()).hexdigest()
+            res = user_object.insertfunc(passed_object)
             if passed_object["usertype"]=="student":
              result= user_object.insert_student(passed_object)
             else:
              result= user_object.insert_teacher(passed_object)
-           
-           
                 
-                
-            if result:
-               return redirect('/')
+            if res:
+                flash("registration successful")
+                return redirect (url_for('signin'))
             else :
-               return render_template("register.html")
+                return redirect (url_for('register_user'))
 
 
             
@@ -74,7 +73,7 @@ def signin():
             if result:
                return redirect('/blank')
             else :
-               return render_template("signin.html",message="Password Galat hai")
+               return render_template("signin.html",context="Incorrect email or password")
         if request.form["section_name"] == "forgot_pass":
             print("inside forgot password")
             email=request.form["email"]
@@ -101,38 +100,45 @@ def teams():
             passed_object = {}
             for each in request.form:
               passed_object[each] = request.form[each]
+              passed_object["team_leader"] = session["name"]
+              passed_object["team_id"] = random.getrandbits(16)
+              passed_object["team_id"]=str(passed_object["team_id"])
             print(passed_object)
-            result= user_object.insert_team(passed_object)
-            team_id=request.form["team_id"]
-            full_name=request.form["team_leader"]
-            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            user_object.insert_team(passed_object)
+            result1=user_object.team_update_members(email=session["email"],team_id=passed_object["team_id"],name=session["name"])
+            return redirect(url_for('teams'))
            
         if request.form["section_name"] == "join_team":
             print("inside join team")
             team_id=request.form["team_id"]
-            full_name=request.form["full_name"]
-            result1=user_object.team_update_members(full_name=full_name,team_id=team_id)
+            r=user_object.team_check(team_id=team_id)
+            if r:
+                result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
+                return redirect (url_for('teams'))
+            else:
+                flash("u r already a member of this team or this team is full")
+                return redirect (url_for('teams'))
     res = user_object.fetch_teams()
     return render_template('team.html',context=res)
 
 @app.route("/project", methods = ["GET" , "POST"])
 @login_required
 def project():
-    if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-       
-    return render_template('project.html')
+    result = user_object.print_projects()
+    return render_template('project.html',result=result)
 
 @app.route("/projectform", methods = ["GET" , "POST"] )
 @login_required
 def projectform():
     if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-       
+        if request.form["section_name"] == "sub_proj":
+            passed_object = {}        
+            for each in request.form:
+                passed_object[each] = request.form[each]
+            print(passed_object)
+            result = user_object.insert_projects(data_dict=passed_object)
+            if result:
+                return redirect('/project')
     return render_template('projectform.html')
 
 @app.route("/profile", methods = ["GET" , "POST"]) 
@@ -142,7 +148,7 @@ def profile():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        result=user_object.update_profile(email=session["email"] ,data_object=passed_object)
+        user_object.update_profile(email=session["email"] ,data_object=passed_object)
     user = user_object.fetch_user(username=session["email"])
     return render_template('profile.html',users_context=user)
    
