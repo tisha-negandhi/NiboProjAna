@@ -87,7 +87,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <center class="m-t-30"> <img src="{{url_for('static',filename='assets/images/users/5.jpg')}}" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10">{{users_context["full_name"]}}</h4>
+                                    <h4 class="card-title m-t-10">{{users_context["name"]}}</h4>
                                     <h6 class="card-subtitle">Diploma Student</h6>
                                     <div class="row text-center justify-content-md-center">
                                         
@@ -99,7 +99,7 @@
                             <div class="card-block"> <small class="text-muted">Email address </small>
                                 <h6>{{users_context["email"]}}</h6> 
                                 <small class="text-muted p-t-30 db">Phone</small>
-                                <h6>{{users_context['contact']}}</h6> 
+                                <h6>{{users_context['phone']}}</h6> 
                                 <small class="text-muted p-t-30 db">Year</small>
                                 <h6>{{users_context["year"]}}</h6> 
                                 <small class="text-muted p-t-30 db">Department</small>
@@ -123,11 +123,11 @@
                                     <div class="card-block">
                                         <div class="profiletimeline">
                                         <small class="text-muted p-t-30 db">Full Name</small>
-                                        <h6>{{users_context["full_name"]}}</h6>
+                                        <h6>{{users_context["name"]}}</h6>
                                         <small class="text-muted p-t-30 db">Email</small>
                                         <h6>{{users_context["email"]}}</h6>  
                                         <small class="text-muted p-t-30 db">Phone No.</small>
-                                        <h6>{{users_context['contact']}}</h6>
+                                        <h6>{{users_context['phone']}}</h6>
                                         <small class="text-muted p-t-30 db">Year</small>
                                         <h6>{{users_context["year"]}}</h6>
                                         <small class="text-muted p-t-30 db">Department</small>
@@ -154,26 +154,26 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Full Name</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" name="full_name" value="{{users_context['full_name']}}" placeholder="Full Name" class="form-control form-control-line">
+                                                    <input type="text" name="full_name" value="{{users_context['name']}}" placeholder="Full Name" class="form-control form-control-line" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email" class="col-md-12">Email</label>
                                                 <div class="col-md-12">
-                                                    <input type="email" name="email"value="{{users_context['email']}}" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                    <input type="email" name="email"value="{{users_context['email']}}" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email" required>
                                                 </div>
                                             </div>
                                             
                                             <div class="form-group">
                                                 <label class="col-md-12">Phone No</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" name="contact" value="{{users_context['contact']}}" placeholder="9873475223" class="form-control form-control-line">
+                                                    <input type="text" name="contact" value="{{users_context['phone']}}" placeholder="9873475223" class="form-control form-control-line" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                             <label class="col-sm-12">Select Year</label> 
                                              <div class="col-md-12">
-                                                <select class="form-control form-control-line" name="year">
+                                                <select class="form-control form-control-line" name="year" required>
                                                     <option {%if users_context["year"] =="FY" %}selected{% endif %}>FY</option>
                                                     <option {%if users_context["year"] =="SY" %}selected{% endif %}>SY</option>
                                                     <option {%if users_context["year"] =="TY" %}selected{% endif %}>TY</option>
@@ -183,7 +183,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-12">Select Department</label> 
                                                  <div class="col-md-12">
-                                                    <select class="form-control form-control-line" name="department">
+                                                    <select class="form-control form-control-line" name="department" required>
                                                         <option {%if users_context["department"] == "Computer Engineering" %}selected {% endif %}>Computer Engineering</option>
                                                         <option {%if users_context["department"] == "Information Technology" %}selected {% endif %}>Information Technology</option>
                                                         <option {%if users_context["department"] == "Electrical Engineering" %}selected {% endif %} >Electrical Engineering</option>
@@ -197,7 +197,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-12">Select Scheme</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-control form-control-line" name="scheme">
+                                                    <select class="form-control form-control-line" name="scheme" required>
                                                         <option {%if users_context["scheme"] == "I" %}selected {% endif %}>I</option>
                                                         <option {%if users_context["scheme"] == "G" %}selected {% endif %}>G</option>
                                                         
@@ -207,19 +207,19 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Division</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="A" class="form-control form-control-line" name="division" value="{{users_context['division']}}">
+                                                    <input type="text" placeholder="A" class="form-control form-control-line" name="division" value="{{users_context['division']}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Roll No</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="27" class="form-control form-control-line" name="rollno" value="{{users_context['rollno']}}">
+                                                    <input type="text" placeholder="27" class="form-control form-control-line" name="rollno" value="{{users_context['rollno']}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Enrollment No.</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" name="enrollmentno" value="{{users_context['enrollmentno']}}" placeholder="183567800" class="form-control form-control-line">
+                                                    <input type="text" name="enrollmentno" value="{{users_context['enrollmentno']}}" placeholder="183567800" class="form-control form-control-line" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">

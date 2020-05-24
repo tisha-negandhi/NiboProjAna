@@ -4,7 +4,7 @@ from flask import render_template,request, url_for, redirect, session
 from flask_pymongo import PyMongo
 import hashlib
 from functools import wraps
-
+import random
 
 
 app = Flask(__name__)
@@ -22,22 +22,30 @@ def login_required(f):
         else:
             flash("You need to login first")
             return redirect(url_for('signin'))
-
     return wrap
-
-
-@app.route("/register_user")
+		
+@app.route("/register_user",methods = ["GET" , "POST"])
 def register_user():
-    pass_dict={}
-    pass_dict["name"]="Nishant Dubey"
-    pass_dict["email"]="a@gmail"
-    pass_dict["password"] = "1234"
-    pass_dict["password"] = hashlib.md5(pass_dict["password"].encode()).hexdigest()
-    result= user_object.insertfunc(pass_dict)
-    if result:
-        return "Inserted"
-    else :
-        return "Failure"
+    if request.method == "POST":
+        if request.form["section_name"] == "reg_form":
+            passed_object = {}
+            passed_object["email"]=request.form["email"]
+            passed_object["phone"]=request.form["phone"]
+            passed_object["usertype"]=request.form["user_type"]
+            passed_object["password"] = hashlib.md5(request.form["password"].encode()).hexdigest()
+            
+            res = user_object.insertfunc(passed_object)
+
+            passed_object["name"]=request.form["name"]
+            result= user_object.insert_user_type(passed_object, table_name = passed_object["usertype"])    
+            if res:
+                flash("registration successful")
+                return redirect (url_for('signin'))
+            else :
+                return redirect (url_for('register_user'))           
+     
+    return render_template('register.html')
+    
 
 
 @app.route("/", methods = ["GET" , "POST"])
@@ -53,7 +61,7 @@ def signin():
             if result:
                return redirect('/blank')
             else :
-               return render_template("signin.html",message="Password Galat hai")
+               return render_template("signin.html",context="Incorrect email or password")
         if request.form["section_name"] == "forgot_pass":
             print("inside forgot password")
             email=request.form["email"]
@@ -75,31 +83,50 @@ def blank():
 @login_required
 def teams():
     if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-        print(passed_object)
-       
-    return render_template('team.html')
+        if request.form["section_name"] == "create_team":
+            print("inside create team")
+            passed_object = {}
+            
+            for each in request.form:
+              passed_object[each] = request.form[each]
+
+            passed_object["team_leader"] = session["name"]
+            passed_object["team_id"] = str(random.getrandbits(16))
+            print(passed_object)
+            user_object.insert_team(passed_object)
+            result1=user_object.team_update_members(email=session["email"],team_id=passed_object["team_id"],name=session["name"])
+            return redirect(url_for('teams'))
+           
+        if request.form["section_name"] == "join_team":
+            print("inside join team")
+            team_id=request.form["team_id"]
+            r=result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
+            if r:
+                return redirect (url_for('teams'))
+            else:
+                flash("u r already a member of this team or this team is full")
+                return redirect (url_for('teams'))
+    res = user_object.fetch_teams(email=session["email"])
+    return render_template('team.html',context=res)
 
 @app.route("/project", methods = ["GET" , "POST"])
 @login_required
 def project():
-    if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-       
-    return render_template('project.html')
+    result = user_object.print_projects()
+    return render_template('project.html',result=result)
 
 @app.route("/projectform", methods = ["GET" , "POST"] )
 @login_required
 def projectform():
     if request.method == "POST":
-        passed_object = {}
-        for each in request.form:
-            passed_object[each] = request.form[each]
-       
+        if request.form["section_name"] == "sub_proj":
+            passed_object = {}        
+            for each in request.form:
+                passed_object[each] = request.form[each]
+            print(passed_object)
+            result = user_object.insert_projects(data_dict=passed_object)
+            if result:
+                return redirect('/project')
     return render_template('projectform.html')
 
 @app.route("/profile", methods = ["GET" , "POST"]) 
@@ -109,8 +136,8 @@ def profile():
         passed_object = {}
         for each in request.form:
             passed_object[each] = request.form[each]
-        result=user_object.update_profile(email=session["email"] ,data_object=passed_object)
-    user = user_object.fetch_user(username=session["email"])
+        user_object.update_profile(email=session["email"] ,data_object=passed_object, usertype = session["usertype"])
+    user = user_object.fetch_user(username=session["email"],usertype = session["usertype"])
     return render_template('profile.html',users_context=user)
    
 if __name__=='__main__':
