@@ -120,7 +120,11 @@
                                         <tbody>
                                             {% for x in result %}
                                                 <tr>
-                                                    <td>{{x["teamid"] }}</td>
+                                                    <td>
+                                                
+                                                      <a href="#" data-toggle="tooltip" data-original-title='Team {{x["team_name"]}}'>{{x["team_id"] }}</a>
+                                                    
+                                                    </td>
                                                     <td>{{x["title"] }}</td>
                                                     <td>{{x["description"] }}</td>
                                                     <td> <span class="label label-info">{{x["tags"] }}</span></td>

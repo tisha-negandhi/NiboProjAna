@@ -96,7 +96,7 @@ def teams():
             passed_object["team_id"] = str(random.getrandbits(16))
             print(passed_object)
             user_object.insert_team(passed_object)
-            result1=user_object.team_update_members(email=session["email"],team_id=passed_object["team_id"],name=session["name"])
+            user_object.team_update_members(email=session["email"],team_id=passed_object["team_id"],name=session["name"])
             return redirect(url_for('teams'))
            
         if request.form["section_name"] == "join_team":
@@ -105,7 +105,7 @@ def teams():
             r = user_object.team_check(team_id=team_id)
             
             if r:
-                result1=user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
+                user_object.team_update_members(email=session["email"],team_id=team_id,name=session["name"])
                 return redirect (url_for('teams'))
             else:
                 flash("u r already a member of this team or this team is full")
@@ -124,10 +124,12 @@ def project():
 def projectform():
     if request.method == "POST":
         if request.form["section_name"] == "sub_proj":
-            passed_object = {}        
+            passed_object = {}
+            teamdet = user_object.fetch_teams(email=session["email"])        
             for each in request.form:
                 passed_object[each] = request.form[each]
-            print(passed_object)
+            passed_object["team_id"]= teamdet["team_id"]
+            passed_object["team_name"]= teamdet["team_name"]
             result = user_object.insert_projects(data_dict=passed_object)
             if result:
                 return redirect('/project')

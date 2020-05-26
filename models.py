@@ -78,7 +78,7 @@ class Users:
         if session["usertype"] == "teacher":
             return self.mongo.teams.find()
         else:
-             return self.mongo.teams.find({"team_members.email":email})
+             return self.mongo.teams.find_one({"team_members.email":email})
 
     
     def insert_projects(self,data_dict):
@@ -86,5 +86,6 @@ class Users:
 
     def print_projects(self):
         return self.mongo.projects.find()
+   
         
       
