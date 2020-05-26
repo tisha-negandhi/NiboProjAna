@@ -189,6 +189,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                    {% if context!=None %}
                                         {% for x in context %}
                                             <tr>
                                                 <td>{{ x["team_id"] }}</td>
@@ -200,6 +201,7 @@
                                                 <td></td>
                                             </tr>
                                         {% endfor %}
+                                    {% endif %}
                                     </tbody>
                                          <tfoot> 
                                              <tr>
