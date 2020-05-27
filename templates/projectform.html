@@ -135,29 +135,19 @@
                                         <input type="url" class="form-control form-control-line" name="github" required>
                                     </div>
 
-                                    <!-- <div class="form-group">
-                                        <form>
-                                                            <label>File upload</label>
-                                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                                                <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                                                                <input type="hidden">
-                                                                <input type="file" name="projectfiles"> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput" name="file">Remove</a> </div> 
-                                                        <input type = "file" multiple accept ="image/*" name= "images" required>
-                                                        <input type ="submit" value = "upload">
+                                    <div class = "form-group">
+                                    <label>File upload</label>
+                                    <br>
+                                    <input type = "file" multiple accept ="image/*" name= "images" required>
+                                    
 
-                                                            </div>
-                                </form>                      -->
+                                    </div>
+                               
+                                   
                                     <button class="btn btn-success" type="submit" name="section_name" value="sub_proj">Submit</button>
                                     <button class="btn btn-success" type="submit">Cancel</button>
                                 </form>
-                                    <form method="POST" action="{{url_for('upload_func')}}" enctype="multipart/form-data">
-                                        <label>File upload</label>
-                                    
-                                        <input type = "file" multiple accept ="image/*" name= "images" required>
-                                         <input type ="submit" value = "upload">
-
                                 
-                                    </form> 
 
 
                             </div>

@@ -1,4 +1,4 @@
-from app import *
+from app import mongo,app
 from flask import session
 import os ,datetime
 
@@ -88,15 +88,14 @@ class Users:
     def print_projects(self):
             return self.mongo.projects.find()
 
-    # def upload_files(self,each_file):
-    #     if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    #         os.makedirs(app.config['UPLOAD_FOLDER'])
-    #     filename= str(datetime.datetime.utcnow())+ "." + each_file.filename.split(".")[1]
-    #     file_path = os.path.join(app.config['UPLOAD_FOLDER'],filename)
-    #     each_file.save(file_path)
-        
-    #     result =  self.mongo.projects.update({},{"$push":{"file_link":file_path}})
-    #     return result
+    def upload_files(self,each_file,teamdet):
+        if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.makedirs(app.config['UPLOAD_FOLDER'])
+        # filename= str(datetime.datetime.utcnow())+ "." + each_file.filename.split(".")[1]
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'],each_file.filename)
+        each_file.save(file_path)
+        result =  self.mongo.projects.update({"team_id":teamdet["team_id"]},{"$push":{"file_link":file_path}})
+        return result
    
         
       

@@ -130,33 +130,17 @@ def projectform():
             teamdet = user_object.fetch_teams(email=session["email"])        
             for each in request.form:
                 passed_object[each] = request.form[each]
-            files = request.files.getlist("images")
-            data_object={}
-            for each_file in files:
-                if not os.path.exists(app.config['UPLOAD_FOLDER']):
-                    os.makedirs(app.config['UPLOAD_FOLDER'])
-                filename= str(datetime.datetime.utcnow())+ "." + each_file.filename.split(".")[1]
-                file_path = os.path.join(app.config['UPLOAD_FOLDER'],filename)
-                each_file.save(file_path)
-        
-    #     result =  self.mongo.projects.update({},{"$push":{"file_link":file_path}})
-                #user_object.upload_files(each_file=each_file)
             passed_object["team_id"]= teamdet["team_id"]
             passed_object["team_name"]= teamdet["team_name"]
-            result = user_object.insert_projects(data_dict=passed_object)
-            if result:
+            result1 = user_object.insert_projects(data_dict=passed_object)
+            files = request.files.getlist("images") 
+            for each_file in files:
+                result2=user_object.upload_files(each_file=each_file,teamdet=teamdet)
+            
+            if result1 and result2:
                 return redirect('/project')
     return render_template('projectform.html')
 
-#@app.route("/upload_func", methods = ["GET" , "POST"])
-#def upload_func():
-#    files = request.files.getlist("images")
-#    data_object={}
-#    teamdet = user_object.fetch_teams(email=session["email"]) 
-#    for each_file in files:
-#        user_object.upload_files(each_file=each_file)
-        
-#    return render_template('blank.html', context='data')
 
 
 @app.route("/profile", methods = ["GET" , "POST"]) 
