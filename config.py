@@ -8,3 +8,4 @@ class Config:
     SESSION_TYPE = os.environ.get('SECRET_TYPE')
     MONGO_URI = os.environ.get('MONGO_URI')
     FLASK_ENV = os.environ.get('FLASK_ENV')
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER')
