@@ -130,12 +130,13 @@ def projectform():
             teamdet = user_object.fetch_teams(email=session["email"])        
             for each in request.form:
                 passed_object[each] = request.form[each]
-            passed_object["team_id"]= teamdet["team_id"]
-            passed_object["team_name"]= teamdet["team_name"]
+            # passed_object["team_id"]= teamdet["team_id"]
+            # passed_object["team_name"]= teamdet["team_name"]
             result1 = user_object.insert_projects(data_dict=passed_object)
-            files = request.files.getlist("images") 
+            files = request.files.getlist("images")
+
             for each_file in files:
-                result2=user_object.upload_files(each_file=each_file,teamdet=teamdet)
+                result2=user_object.upload_files(each_file=each_file,teamdet=teamdet,data_dict= passed_object)
             
             if result1 and result2:
                 return redirect('/project')

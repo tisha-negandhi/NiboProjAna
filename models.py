@@ -79,7 +79,7 @@ class Users:
         if session["usertype"] == "teacher":
             return self.mongo.teams.find()
         else:
-             return self.mongo.teams.find_one({"team_members.email":email})
+             return self.mongo.teams.find({"team_members.email":email})
 
     
     def insert_projects(self,data_dict):
@@ -88,13 +88,14 @@ class Users:
     def print_projects(self):
             return self.mongo.projects.find()
 
-    def upload_files(self,each_file,teamdet):
+    def upload_files(self,each_file,teamdet,data_dict):
         if not os.path.exists(app.config['UPLOAD_FOLDER']):
             os.makedirs(app.config['UPLOAD_FOLDER'])
-        # filename= str(datetime.datetime.utcnow())+ "." + each_file.filename.split(".")[1]
+        filename= str(datetime.datetime.utcnow())+ "." + each_file.filename.split(".")[1]
         file_path = os.path.join(app.config['UPLOAD_FOLDER'],each_file.filename)
         each_file.save(file_path)
-        result =  self.mongo.projects.update({"team_id":teamdet["team_id"]},{"$push":{"file_link":file_path}})
+         
+        result =  self.mongo.projects.update({"team_id":data_dict["team_id"]},{"$push":{"file_link":file_path.split("\\")[1]}})
         return result
    
         
