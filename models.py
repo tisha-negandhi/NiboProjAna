@@ -85,8 +85,12 @@ class Users:
     def insert_projects(self,data_dict):
         return self.mongo.projects.insert(data_dict)
 
-    def print_projects(self):
+    def print_projects(self,email):
+        if session["usertype"] == "teacher":
             return self.mongo.projects.find()
+        else:
+            return self.mongo.projects.find({"team_members.email":email})
+
 
     def upload_files(self,each_file,teamdet,data_dict):
         if not os.path.exists(app.config['UPLOAD_FOLDER']):

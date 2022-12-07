@@ -118,7 +118,7 @@ def teams():
 @app.route("/project", methods = ["GET" , "POST"])
 @login_required
 def project():
-    result = user_object.print_projects()
+    result = user_object.print_projects(email=session["email"])
     return render_template('project.html',result=result)
 
 @app.route("/projectform", methods = ["GET" , "POST"] )
